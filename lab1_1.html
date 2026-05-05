@@ -6,11 +6,25 @@
     <title>Пенсионный калькулятор</title>
 </head>
 <body>
-    <form id="PensionCalculator">
-        Возраст:<input type="number" id="age" required min="0">
-        Пол:<input type="radio" ad="gender" value="male" required>Мужской
-        <input type="radio" ad="gender" value="female" required>:tycrbq 
+    <form id="pensionForm">
+        Возраст: <input type="number" id="age" required min="0">
+
+        Пол: 
+        <input type="radio" name="gender" value="male" required> Мужской
+        <input type="radio" name="gender" value="female"> Женский
+
+        <button type="submit">Рассчитать</button>
+
+        <textarea id="result" cols="40" rows="5" readonly></textarea>
     </form>
-    <inpyt name=""
+
+    <script>
+        let form = document.forms.pensionForm;
+        let ageElems=form.elements.age;
+        alert(ageElems.value);
+        let genderElems=form.elements.gender;
+        alert(genderElems[0]);
+    </script>
+
 </body>
 </html>
