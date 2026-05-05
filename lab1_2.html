@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Считать ворон</title>
 </head>
 <body>
-    
-    <form id="pensionForm">
-        Количество ворон: <input type="number" id="num" required min="0">
+    <input type="number" id="num" placeholder="Введите число ворон">
+    <button onclick="countCrows()">Считать</button>
 
-        <button type="submit">Считать</button>
+    <script>
+        function countCrows() {
+            let n = Math.abs(parseInt(document.getElementById('num').value));
+            let word = "";
+            
+            // Правила русского языка для слова "ворона"
+            let lastDigit = n % 10;
+            let lastTwoDigits = n % 100;
 
-        <textarea id="result" cols="40" rows="5" readonly></textarea>
-    </form>
-
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+                word = "ворон";
+            } else {
+                switch (lastDigit) {
+                    case 1: word = "ворона"; break;
+                    case 2:
+                    case 3:
+                    case 4: word = "вороны"; break;
+                    default: word = "ворон"; break;
+                }
+            }
+            alert(`На ветке сидит ${n} ${word}`);
+        }
+    </script>
 </body>
 </html>

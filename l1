@@ -1,22 +1,42 @@
-  <script>
-        document.getElementById('pensionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const age = parseInt(document.getElementById('age').value);
-            const gender = document.querySelector('name="gender"]:checked').value;
-            const resArea = document.getElementById('result');
-            let message = "";
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ввод числа</title>
+</head>
+<body>
+    <a href="index.html" id="numberLink">Получить число</a>
 
-            if (age >= 0 && age <= 17) {
-                message = "Вам работать ещё рано — учитесь";
-            } else if ((gender === 'male' && age >= 18 && age <= 59) || (gender === 'female' && age >= 18 && age <= 54)) {
-                message = "Вам ещё работать и работать";
-            } else if ((gender === 'male' && age >= 60 && age <= 64) || (gender === 'female' && age >= 55 && age <= 59)) {
-                message = "Скоро пенсия!";
-            } else if ((gender === 'male' && age >= 65) || (gender === 'female' && age >= 60)) {
-                message = "Вам пора на пенсию";
-            } else {
-                message = "Да кто ты такой?";
+    <script>
+        document.getElementById('numberLink').onclick = function(e) {
+            let input;
+            let success = false;
+
+            while (true) {
+                input = prompt("Введите число больше 100", "");
+                
+                if (input === null) {
+                    // Нажали Cancel
+                    success = false;
+                    break;
+                }
+                
+                if (Number(input) > 100) {
+                    success = true;
+                    break;
+                }
             }
-            resArea.value = message;
-        });
+
+            if (success) {
+                // Переход по ссылке разрешен
+                return true; 
+            } else {
+                // Если нажали Cancel, спрашиваем подтверждение
+                if (!confirm("Вы не ввели нужное число. Все равно перейти?")) {
+                    e.preventDefault(); // Остаемся на странице
+                }
+            }
+        };
     </script>
+</body>
+</html>
