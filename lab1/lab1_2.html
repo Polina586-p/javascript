@@ -13,10 +13,10 @@
             let n = Math.abs(parseInt(document.getElementById('num').value));
             let word = "";
 
-            let lastDigit = n % 10;
-            let lastTwoDigits = n % 100;
+            let k1 = n % 10;
+            let k2 = n % 100;
 
-            if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+            if (k1 >= 11 && k2 <= 14) {
                 word = "ворон";
             } else {
                 switch (lastDigit) {
