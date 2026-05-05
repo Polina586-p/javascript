@@ -5,10 +5,10 @@
     <title>Ввод числа</title>
 </head>
 <body>
-    <a href="index.html" id="numberLink">Получить число</a>
+    <a href="index.html" id="number">Получить число</a>
 
     <script>
-        document.getElementById('numberLink').onclick = function(e) {
+        document.getElementById('number').onclick = function(f) {
             let input;
             let success = false;
 
@@ -16,7 +16,6 @@
                 input = prompt("Введите число больше 100", "");
                 
                 if (input === null) {
-                    // Нажали Cancel
                     success = false;
                     break;
                 }
@@ -28,12 +27,12 @@
             }
 
             if (success) {
-                // Переход по ссылке разрешен
+
                 return true; 
             } else {
-                // Если нажали Cancel, спрашиваем подтверждение
-                if (!confirm("Вы не ввели нужное число. Все равно перейти?")) {
-                    e.preventDefault(); // Остаемся на странице
+
+                if (confirm("Вы не ввели нужное число. Все равно перейти?")) {
+                    f.preventDefault();
                 }
             }
         };
