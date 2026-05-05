@@ -20,13 +20,12 @@
 
     <script>
         let form = document.forms.pensionForm;
-        
         let ageElems=form.elements.age;
         alert(ageElems.value);
 
         let genderElems=form.elements.gender;
         alert(genderElems[0]);
-
+        
         let message = "";
 
             if (age >= 0 && age <= 17) {
