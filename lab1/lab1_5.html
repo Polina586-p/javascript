@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Таблица</title>
+    <title>Таблица животных</title>
 </head>
 <body>
-    
+    Количество строк: <input type="number" id="rowsCount">
+    <button onclick="drawAnimals()">Рисовать</button>
+
+    <script>
+        function drawAnimals() {
+            const rows = parseInt(document.getElementById('rowsCount').value);
+            const pattern = ["dog", "dog", "dog", "cat", "cat"];
+            let animalCounter = 0;
+
+            for (let i = 0; i < rows; i++) {
+                let rowOutput = "";
+                for (let j = 0; j < 6; j++) {
+                    // Берем животное из паттерна по кругу
+                    rowOutput += pattern[animalCounter % pattern.length] + "\t";
+                    animalCounter++;
+                }
+                console.log(rowOutput);
+            }
+        }
+    </script>
 </body>
 </html>
