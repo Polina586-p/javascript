@@ -31,8 +31,8 @@ function factorial(n){
 //}
 
 // 2.7 функция sum(), которая возвращает сумму всех своих аргументов.
-function sum(''){ 
-    return '';
+function sum(){ 
+    return 0;
 }
 function sum(n){ 
     return n;
