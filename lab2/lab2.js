@@ -16,8 +16,7 @@ function isLeapYear(year){
 
 // 2.4 функция factorial(n), которая возвращает факториал числа n!, используя рекурсивный вызов n!= n*(n-1)!. 
 function factorial(n){ 
-    for(i=1; i<n+1; i++){
-        fac;
-    }
-    return sum; 
+    if(n==0) return 1n;
+    return BigInt(n)*factorial(n-1);
+    
 }
