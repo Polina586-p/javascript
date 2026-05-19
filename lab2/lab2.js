@@ -11,7 +11,7 @@ function sumTo(n){
 
 // 2.3 функция-предикат isLeapYear(year), которая проверят год year на високосность.
 function isLeapYear(year){
-    if(year%400==0||year%4==0&&year%100!=0) return True;
+    return (year%400==0)||(year%4==0 && year%100!=0);
 }
 
 // 2.4 функция factorial(n), которая возвращает факториал числа n!, используя рекурсивный вызов n!= n*(n-1)!. 
