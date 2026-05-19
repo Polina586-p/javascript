@@ -17,7 +17,6 @@
             for (let i = 0; i < rows; i++) {
                 let rowOutput = "";
                 for (let j = 0; j < 6; j++) {
-                    // Берем животное из паттерна по кругу
                     rowOutput += pattern[animalCounter % pattern.length] + "\t";
                     animalCounter++;
                 }
