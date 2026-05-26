@@ -36,8 +36,14 @@ function camelize(str){
 
 // 3.6 Функция fibs(n), которая для натурального n возвращает массив, заполненный числами Фибоначчи до n-го (не включая его).
 
-function fibs(n){
+import {fib} from './lab2.js';
 
+function fibs(n){
+    const result = [];
+    for (let i=0; i<n; i++){
+        result.push(fib(i));
+    }
+    return result;
 }
 
 // 3.7 Функция arrReverseSorted(arr), которая принимает неупорядоченный массив чисел arr и возвращает массив из тех же элементов, но отсортированный по убыванию.

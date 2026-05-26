@@ -26,7 +26,7 @@ function factorial(n) {
 
 // 2.5 функция fib(n), которая возвращает n-е число Фибоначчи.
 
-function fib(n) {
+export function fib(n) {
     if (n === 0) return 0n;
     
     function f(m) {
