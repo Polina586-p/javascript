@@ -1,12 +1,12 @@
 // 3.1 Функция getDecimal(num), которая возвращает дробную часть числа num.
 
-function getDecimal(num){
+export function getDecimal(num){
     return num%1;
 }
 
 // 3.2  Функция normalizeUrl(url), которая выполняет так называемую нормализацию данных.
 
-function normalizeUrl(url){
+export function normalizeUrl(url){
    if(url.startsWith('http://')){
     return 'https://' + url.slice(7);
    }
@@ -18,19 +18,19 @@ function normalizeUrl(url){
 
 // 3.3 Функция checkSpam(str), которая возвращает true, если строка str содержит 'viagra' или 'XXX', а иначе false. 
 
-function checkSpam(str){
+export function checkSpam(str){
 
 }
 
 // 3.4 Функция truncate(str, maxlength), которая проверяет длину строки str, и если она превосходит maxlength – заменяет конец str на символ многоточие "…" (номер в Юникоде U+2026), так чтобы ее длина стала равна maxlength. 
 
-function truncate(str, maxlength){
+export function truncate(str, maxlength){
     
 }
 
 // 3.5 Функция camelize(str), которая преобразуйте строку вида 'var-test-text' в 'varTestText'.
 
-function camelize(str){
+export function camelize(str){
 
 }
 
@@ -38,7 +38,7 @@ function camelize(str){
 
 import {fib} from './lab2.js';
 
-function fibs(n){
+export function fibs(n){
     const result = [];
     for (let i=0; i<n; i++){
         result.push(fib(i));
@@ -48,12 +48,12 @@ function fibs(n){
 
 // 3.7 Функция arrReverseSorted(arr), которая принимает неупорядоченный массив чисел arr и возвращает массив из тех же элементов, но отсортированный по убыванию.
 
-function arrReverseSorted(arr){
+export function arrReverseSorted(arr){
 
 }
 
 // 3.8 Функция unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr. 
 
-function unique(arr){
+export function unique(arr){
 
 }
