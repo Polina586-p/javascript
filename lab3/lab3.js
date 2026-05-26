@@ -15,3 +15,39 @@ function normalizeUrl(url){
    }
    return 'http://' + url;
 }
+
+// 3.3 Функция checkSpam(str), которая возвращает true, если строка str содержит 'viagra' или 'XXX', а иначе false. 
+
+function checkSpam(str){
+
+}
+
+// 3.4 Функция truncate(str, maxlength), которая проверяет длину строки str, и если она превосходит maxlength – заменяет конец str на символ многоточие "…" (номер в Юникоде U+2026), так чтобы ее длина стала равна maxlength. 
+
+function truncate(str, maxlength){
+    
+}
+
+// 3.5 Функция camelize(str), которая преобразуйте строку вида 'var-test-text' в 'varTestText'.
+
+function camelize(str){
+
+}
+
+// 3.6 Функция fibs(n), которая для натурального n возвращает массив, заполненный числами Фибоначчи до n-го (не включая его).
+
+function fibs(n){
+
+}
+
+// 3.7 Функция arrReverseSorted(arr), которая принимает неупорядоченный массив чисел arr и возвращает массив из тех же элементов, но отсортированный по убыванию.
+
+function arrReverseSorted(arr){
+
+}
+
+// 3.8 Функция unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr. 
+
+function unique(arr){
+
+}
