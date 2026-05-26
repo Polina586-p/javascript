@@ -26,13 +26,21 @@ function factorial(n) {
 
 // 2.5 функция fib(n), которая возвращает n-е число Фибоначчи.
 
-export function fib(n) {
+function fib(n) {
     if (n === 0) return 0n;
-    let a = 0n, b = 1n;
-    for (let i = 2; i <= n; i++) {
-        [a, b] = [b, a + b];
+    
+    function f(m) {
+        if (m === 0) return [0n, 1n];
+        const [c, d] = f(m >> 1);
+        const aa = c * ((d << 1n) - c);
+        const bb = c * c + d * d;
+        if (m & 1) {
+            return [bb, aa + bb];
+        } else {
+            return [aa, bb];
+        }
     }
-    return b;
+    return f(n)[0];
 }
 
 // 2.6 функция compare(), которая принимает целочисленное значение x и возвращает анонимную функцию.
