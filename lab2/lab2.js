@@ -1,5 +1,5 @@
-
-export function pow(x, n) {
+// Функция pow(x,n), которая возвращает x в степени n (n - целое число).
+function pow(x, n) {
     if (n === 0) return 1;
     if (n < 0) return 1 / pow(x, -n);
     
@@ -10,21 +10,24 @@ export function pow(x, n) {
     return result;
 }
 
-export function sumTo(n) {
+// Функция sumTo(n), которая для данного натурального n вычисляет сумму чисел от 1 до n включительно.
+function sumTo(n) {
     return n * (n + 1) / 2;
 }
 
-
-export function isLeapYear(year) {
+// Функция-предикат isLeapYear(year), которая проверят год year на високосность.
+function isLeapYear(year) {
     return (year % 400 === 0) || (year % 100 !== 0 && year % 4 === 0);
 }
 
-export function factorial(n) {
+// Функция factorial(n), которая возвращает факториал числа n!, используя рекурсивный вызов n!= n*(n-1)!.
+function factorial(n) {
     if (n === 0) return 1n;
     return BigInt(n) * factorial(n - 1);
 }
 
-export function fib(n) {
+// Функция fib(n), которая возвращает n-е число Фибоначчи.
+function fib(n) {
     let a = 0n;
     let b = 1n;
     if (n === 0) return a;
@@ -37,7 +40,8 @@ export function fib(n) {
     return b;
 }
 
-export function compare(x) {
+// Функция compare(), которая принимает целочисленное значение x и возвращает анонимную функцию.
+function compare(x) {
     return function(y) {
         if (y > x) return true;
         if (y < x) return false;
@@ -45,11 +49,13 @@ export function compare(x) {
     };
 }
 
-export function sum(...args) {
+//Функция sum(...), которая возвращает сумму всех своих аргументов.
+function sum(...args) {
     return args.reduce((total, current) => total + current, 0);
 }
 
-export function addBlackSpot(obj) {
+// Функция addBlackSpot(), которая принимает на вход объект и возвращает этот объект с добавленным к нему символьным свойством blackSpot=true, которое бёрется из глобального реестра символов.
+function addBlackSpot(obj) {
     obj[Symbol.for("blackSpot")] = true;
     return obj;
 }
