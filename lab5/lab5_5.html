@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Сообщения</title>
+    <style>
+        .message {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            background: #f9f9f9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hidden {
+            display: none;  /* сообщение скрывается, но не удаляется */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .close-btn:hover {
+            color: darkred;
+        }
+
+        button {
+            margin-bottom: 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h3>Список сообщений</h3>
+    
+    <button id="showAllBtn">Показать все сообщения</button>
+
+    <div class="message">
+        <span class="close-btn" title="Скрыть сообщение (не удалять)">&times;</span> 
+        <strong>Лошадь</strong><br>
+        Домашняя лошадь – животное семейства непарнокопытных...
+    </div>
+    <div class="message">
+        <span class="close-btn" title="Скрыть сообщение (не удалять)">&times;</span>
+        <strong>Осёл</strong><br>
+        Домашний осёл или ишак – одомашненный подвид дикого осла...
+    </div>
+    <div class="message">
+        <span class="close-btn" title="Скрыть сообщение (не удалять)">&times;</span>
+        <strong>Корова</strong><br>
+        Корова – самка домашнего быка...
+    </div>
+
+    <script>
+        'use strict';
+
+        // Скрытие сообщений (без удаления)
+        const closeButtons = document.querySelectorAll('.close-btn');
+        
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const messageBox = this.closest('.message');
+                if (messageBox) {
+                    // Просто добавляем класс hidden – сообщение скрывается, но остаётся в DOM
+                    messageBox.classList.add('hidden');
+                }
+            });
+        });
+
+        // Кнопка для восстановления всех скрытых сообщений (доказывает, что они не удалены)
+        const showAllBtn = document.getElementById('showAllBtn');
+        showAllBtn.addEventListener('click', function() {
+            const allMessages = document.querySelectorAll('.message');
+            allMessages.forEach(msg => {
+                msg.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
