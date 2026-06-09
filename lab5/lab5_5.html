@@ -69,7 +69,6 @@
 
 <body>
 
-    <!-- Добавлена кнопка для восстановления скрытых сообщений -->
     <button id="restore-all-btn" class="restore-button">Показать все скрытые сообщения</button>
 
     <div id="messages-container">
@@ -142,7 +141,7 @@
          * @private
          */
         _init() {
-            // Делегирование событий: клик по кнопке закрытия внутри контейнера
+
             this._container.addEventListener('click', (event) => {
                 /** @type {HTMLElement} */
                 const target = event.target;
@@ -152,7 +151,6 @@
                 }
             });
 
-            // Клик по кнопке восстановления всех скрытых карточек
             this._restoreBtn.addEventListener('click', () => {
                 this.restoreAllMessages();
             });
@@ -188,7 +186,6 @@
         }
     }
 
-    // Инициализация менеджера с привязкой контейнера и управляющей кнопки
     const manager = new MessageManager('messages-container', 'restore-all-btn');
 </script>
 
