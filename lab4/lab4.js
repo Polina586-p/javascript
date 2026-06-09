@@ -228,7 +228,6 @@ try {
   }
   console.log("Секунд с начала дня: ", getSecondsToday());
 
-
   function formatDate(date) {
     return date.toLocaleDateString();
   }
