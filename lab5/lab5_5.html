@@ -27,6 +27,12 @@
             padding: 10px 20px 10px;
             border-top: solid 2px #c4df9b;
             position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* Класс для скрытия элементов */
+        .pane.hidden {
+            display: none;
         }
 
         .remove-button {
@@ -40,11 +46,31 @@
             height: 24px;
             border: none;
             background: transparent;
+            cursor: pointer;
+        }
+
+        /* Стиль для кнопки восстановления */
+        .restore-button {
+            display: block;
+            margin: 0 auto 15px;
+            padding: 8px 16px;
+            background-color: #c4df9b;
+            border: 1px solid #a3c477;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        .restore-button:hover {
+            background-color: #b3d488;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Добавлена кнопка для восстановления скрытых сообщений -->
+    <button id="restore-all-btn" class="restore-button">Показать все скрытые сообщения</button>
 
     <div id="messages-container">
         <div class="pane">
@@ -73,13 +99,97 @@
     <script>
     'use strict';
 
-    const removeButtons = document.querySelectorAll('.remove-button');
+    /**
+     * Класс для управления списком уведомлений или сообщений на странице.
+     * Позволяет скрывать отдельные карточки и восстанавливать их отображение.
+     */
+    class MessageManager {
+        /**
+         * Создает экземпляр менеджера сообщений.
+         * 
+         * @param {string} containerId - Идентификатор главного контейнера сообщений.
+         * @param {string} restoreBtnId - Идентификатор кнопки восстановления сообщений.
+         */
+        constructor(containerId, restoreBtnId) {
+            /** 
+             * Главный контейнер, содержащий все плашки сообщений.
+             * @type {HTMLElement|null} 
+             * @private
+             */
+            this._container = document.getElementById(containerId);
 
-    removeButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            button.parentNode.remove();
-        });
-    });
+            /** 
+             * Кнопка для восстановления всех скрытых сообщений.
+             * @type {HTMLElement|null} 
+             * @private
+             */
+            this._restoreBtn = document.getElementById(restoreBtnId);
+
+            if (!this._container) {
+                throw new Error(`Элемент с id "${containerId}" не найден.`);
+            }
+            if (!this._restoreBtn) {
+                throw new Error(`Элемент с id "${restoreBtnId}" не найден.`);
+            }
+
+            this._init();
+        }
+
+        /**
+         * Инициализирует обработчики событий для скрытия и восстановления элементов.
+         * 
+         * @returns {void}
+         * @private
+         */
+        _init() {
+            // Делегирование событий: клик по кнопке закрытия внутри контейнера
+            this._container.addEventListener('click', (event) => {
+                /** @type {HTMLElement} */
+                const target = event.target;
+
+                if (target.classList.contains('remove-button')) {
+                    this.hideMessage(target);
+                }
+            });
+
+            // Клик по кнопке восстановления всех скрытых карточек
+            this._restoreBtn.addEventListener('click', () => {
+                this.restoreAllMessages();
+            });
+        }
+
+        /**
+         * Скрывает плашку сообщения, добавляя ей CSS-класс 'hidden'.
+         * 
+         * @param {HTMLElement} button - Элемент кнопки, инициировавший скрытие.
+         * @returns {void}
+         */
+        hideMessage(button) {
+            /** @type {HTMLElement|null} */
+            const pane = button.closest('.pane');
+            
+            if (pane) {
+                pane.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Восстанавливает отображение всех скрытых плашек сообщений в контейнере.
+         * 
+         * @returns {void}
+         */
+        restoreAllMessages() {
+            /** @type {NodeListOf<HTMLElement>} */
+            const hiddenPanes = this._container.querySelectorAll('.pane.hidden');
+            
+            hiddenPanes.forEach((pane) => {
+                pane.classList.remove('hidden');
+            });
+        }
+    }
+
+    // Инициализация менеджера с привязкой контейнера и управляющей кнопки
+    const manager = new MessageManager('messages-container', 'restore-all-btn');
 </script>
 
 </body>
