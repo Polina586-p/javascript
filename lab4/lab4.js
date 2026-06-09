@@ -221,12 +221,6 @@ try {
     }
   }
 
-
-  const parsed = JSON.parse(jsonString);
-  const revived = Object.assign(new ClassManager(), parsed);
-  console.log('revived имеет методы:', typeof revived.addClass === 'function');
-
-
   function getSecondsToday() {
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
