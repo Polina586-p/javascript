@@ -118,7 +118,7 @@ try {
 
     let book2 = new Book('Война и мир', 1867, 890);
     book2.show();
-    let book3 = new Book('1984', 1949, 250);
+    let book3 = new Book('Игрок', 1896, 750);
     book3.show();
 
     let books = [book1, book2, book3];
@@ -230,7 +230,7 @@ try {
         return date.toLocaleDateString();
     }
 
-    let date1 = new Date(2024, 0, 20); 
+    let date1 = new Date(2026, 06, 09); 
     let date2 = new Date(2000, 11, 1); 
     let date3 = new Date(1995, 9, 10); 
 
