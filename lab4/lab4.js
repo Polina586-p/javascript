@@ -116,7 +116,7 @@ try {
 
     console.log("Цена book1:", book1.price);
 
-    let book2 = new Book(' ', -1960, -890);
+    let book2 = new Book('Война и мир', 1867, 890);
     book2.show();
     let book3 = new Book('1984', 1949, 250);
     book3.show();
