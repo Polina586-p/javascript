@@ -1,4 +1,3 @@
-'use strict';
 
 class Book {
     constructor(title, pubYear, price) {
