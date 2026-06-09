@@ -1,66 +1,107 @@
-// 3.1 Функция getDecimal(num), которая возвращает дробную часть числа num.
+import { fib } from './lab2.js';
 
-export function getDecimal(num){
-    return+(num>=0?num%1:1+(num%1)).toFixed(2);
+/**
+ * Возвращает дробную часть числа num, округленную до двух знаков после запятой.
+ * Корректно обрабатывает отрицательные числа.
+ *
+ * @param {number} num - Исходное число.
+ * @returns {number} Дробная часть числа.
+ */
+export function getDecimal(num) {
+    return +(num >= 0 ? num % 1 : 1 + (num % 1)).toFixed(2);
 }
 
-// 3.2  Функция normalizeUrl(url), которая выполняет так называемую нормализацию данных.
-
-export function normalizeUrl(url){
-   if(url.startsWith('http://')){
+/**
+ * Нормализует URL-адрес, приводя его к протоколу HTTPS.
+ * Если протокол отсутствует, добавляет 'https://'.
+ *
+ * @param {string} url - Исходный URL-адрес.
+ * @returns {string} Нормализованный URL-адрес с протоколом HTTPS.
+ */
+export function normalizeUrl(url) {
+   if (url.startsWith('http://')) {
     return 'https://' + url.slice(7);
    }
-   if(url.startsWith('https://')){
+   if (url.startsWith('https://')) {
     return url;
    }
    return 'https://' + url;
 }
 
-// 3.3 Функция checkSpam(str), которая возвращает true, если строка str содержит 'viagra' или 'XXX', а иначе false. 
-
-export function checkSpam(str){
+/**
+ * Проверяет строку на наличие спам-слов ('viagra' или 'xxx').
+ * Проверка производится без учета регистра символов.
+ *
+ * @param {string} str - Проверяемая строка.
+ * @returns {boolean} Возвращает true, если найден спам, иначе false.
+ */
+export function checkSpam(str) {
     const lowerStr = str.toLowerCase();
-    return lowerStr.includes('viagra')||lowerStr.includes('xxx');
+    return lowerStr.includes('viagra') || lowerStr.includes('xxx');
 }
 
-// 3.4 Функция truncate(str, maxlength), которая проверяет длину строки str, и если она превосходит maxlength – заменяет конец str на символ многоточие "…" (номер в Юникоде U+2026), так чтобы ее длина стала равна maxlength. 
-
-export function truncate(str, maxlength){
-    if(str.length>maxlength)
-        return str.slice(0,maxlength-1)+ '…';
+/**
+ * Усекает строку str до максимальной длины maxlength.
+ * Если строка усекается, её последний символ заменяется на многоточие '…',
+ * чтобы итоговая длина строки была строго равна maxlength.
+ *
+ * @param {string} str - Исходная строка.
+ * @param {number} maxlength - Максимально допустимая длина строки.
+ * @returns {string} Исходная или усеченная строка с многоточием на конце.
+ */
+export function truncate(str, maxlength) {
+    if (str.length > maxlength)
+        return str.slice(0, maxlength - 1) + '…';
     return str;
 }
 
-// 3.5 Функция camelize(str), которая преобразуйте строку вида 'var-test-text' в 'varTestText'.
-
-export function camelize(str){
-    return str.split('-').map((word,index)=>{
-        if(index===0)
+/**
+ * Преобразует строку из дефисного регистра (kebab-case) в верблюжий регистр (camelCase).
+ * Например: 'var-test-text' превращается в 'varTestText'.
+ *
+ * @param {string} str - Строка в формате kebab-case.
+ * @returns {string} Строка в формате camelCase.
+ */
+export function camelize(str) {
+    return str.split('-').map((word, index) => {
+        if (index === 0)
             return word;
-        return word?word[0].toUpperCase()+word.slice(1):'';
+        return word ? word[0].toUpperCase() + word.slice(1) : '';
     }).join('');
 }
 
-// 3.6 Функция fibs(n), которая для натурального n возвращает массив, заполненный числами Фибоначчи до n-го (не включая его).
-
-import {fib} from './lab2.js';
-
-export function fibs(n){
+/**
+ * Генерирует массив, содержащий первые n чисел Фибоначчи (от 0-го до n-1-го).
+ *
+ * @param {number} n - Натуральное число, определяющее количество элементов.
+ * @returns {bigint[]} Массив чисел Фибоначчи типа BigInt.
+ */
+export function fibs(n) {
     const result = [];
-    for (let i=0; i<n; i++){
+    for (let i = 0; i < n; i++) {
         result.push(fib(i));
     }
     return result;
 }
 
-// 3.7 Функция arrReverseSorted(arr), которая принимает неупорядоченный массив чисел arr и возвращает массив из тех же элементов, но отсортированный по убыванию.
-
-export function arrReverseSorted(arr){
-    return arr.slice().sort((a,b)=>b-a);
+/**
+ * Создает копию массива чисел и сортирует её по убыванию.
+ * Не мутирует оригинальный массив.
+ *
+ * @param {number[]} arr - Неупорядоченный массив чисел.
+ * @returns {number[]} Новый массив, отсортированный по убыванию.
+ */
+export function arrReverseSorted(arr) {
+    return arr.slice().sort((a, b) => b - a);
 }
 
-// 3.8 Функция unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr. 
-
-export function unique(arr){
+/**
+ * Возвращает новый массив, содержащий только уникальные значения из исходного массива.
+ *
+ * @template T - Тип элементов массива.
+ * @param {T[]} arr - Исходный массив с возможными дубликатами.
+ * @returns {T[]} Массив уникальных значений.
+ */
+export function unique(arr) {
     return [...new Set(arr)];
 }
