@@ -16,10 +16,6 @@ class Book {
         this.price = price;
     }
 
-    /**
-     * Получает название книги.
-     * @id70533735 (@returns) {string} Название книги.
-     */
     get title() {
         return this._title;
     }
@@ -37,10 +33,6 @@ class Book {
         this._title = text.trim();
     }
 
-    /**
-     * Получает год публикации.
-     * @id70533735 (@returns) {number} Год публикации.
-     */
     get pubYear() {
         return this._pubYear;
     }
@@ -58,10 +50,6 @@ class Book {
         this._pubYear = newPubYear;
     }
 
-    /**
-     * Получает цену книги.
-     * @id70533735 (@returns) {number} Цена книги.
-     */
     get price() {
         return this._price;
     }
@@ -91,7 +79,6 @@ class Book {
      * Используется для сортировки массива книг.
      ** @param {Book} book1 - Первая книга для сравнения.
      * @param {Book} book2 - Вторая книга для сравнения.
-     * @id70533735 (@returns) {number} Разница между годами издания (отрицательная, если book1 старше).
      */
     static compare(book1, book2) {
         return book1.pubYear - book2.pubYear;
@@ -119,10 +106,24 @@ try {
     }
 
     try {
-        const badBook = new Book('', -1949, -1000);
-        badBook.show();
+        book1.title = '';
+        book1.show();
     } catch (err) {
-        console.error('Ошибка при создании badBook:', err.message);
+        console.error('Ошибка в названии:', err.message);
+    }
+
+    try {
+        book1.price= -1900;
+        book1.show();
+    } catch (err) {
+        console.error('Ошибка: отрицательная цена', err.message);
+    }
+
+    try {
+        book1.pubYear= -1949;
+        book1.show();
+    } catch (err) {
+        console.error('Ошибка: отрицательный год:', err.message);
     }
 
 } catch (err) {
@@ -133,7 +134,6 @@ try {
  * Проверяет, является ли объект пустым (не содержит собственных строковых и символьных свойств).
  * 
  * @param {Object} obj - Проверяемый объект.
- * @id70533735 (@returns) {boolean} True, если объект пустой или не является объектом, иначе false.
  */
 function isEmpty(obj) {
     if (typeof obj !== 'object' || obj === null) return true;
@@ -153,15 +153,23 @@ console.log('obj2 isEmpty?', isEmpty(obj2));
 console.log('obj3 isEmpty?', isEmpty(obj3));
 try {
 
+/**
+ * Проверяет, является ли переданное значение пустым.
+ * 
+ * Пустым считается: null/undefined, пустая строка (или строка из пробелов), 
+ * пустой массив, пустой объект. Объекты Date всегда считаются непустыми.
+ *
+ * @param {*} obj - Значение любого типа для проверки.
+ * @returns {boolean} True, если значение пустое, иначе false.
+ */
   function isEmpty(obj) {
     if (obj == null) return true;              
     if (typeof obj === 'string') return obj.trim() === '';
     if (Array.isArray(obj)) return obj.length === 0;
     if (obj instanceof Date) return false;
     if (typeof obj === 'object') return Object.keys(obj).length === 0;
-    return false; // для чисел/булевых и т.д.
+    return false;
   }
-
 
   const obj1 = {};
   const obj2 = { a: 1 };
@@ -205,8 +213,24 @@ try {
   let object2 = JSON.parse(jsonString);
   console.log('Сравнение JSON строк:', JSON.stringify(object2) === JSON.stringify(classObject)); // true
 
+  /**
+ * Класс для удобного управления CSS-классами в виде строки.
+ */
   class ClassManager {
+
+    /**
+     * Создает экземпляр менеджера классов.
+     * @param {string} [className=''] - Начальная строка с CSS-классами.
+     */
     constructor(className = '') { this.className = className; }
+
+    /**
+     * Добавляет новый класс к списку, если он еще не добавлен.
+     * Поддерживает цепочку вызовов (chaining).
+     * 
+     * @param {string} cls - Имя добавляемого CSS-класса.
+     * @returns {this} Текущий экземпляр ClassManager для цепочки вызовов.
+     */
     addClass(cls) {
       if (!cls) return this;
       const classes = new Set(this.className.split(/\s+/).filter(Boolean));
@@ -214,6 +238,14 @@ try {
       this.className = Array.from(classes).join(' ');
       return this;
     }
+
+    /**
+     * Удаляет указанный класс из списка.
+     * Поддерживает цепочку вызовов (chaining).
+     * 
+     * @param {string} cls - Имя удаляемого CSS-класса.
+     * @returns {this} Текущий экземпляр ClassManager для цепочки вызовов.
+     */
     removeClass(cls) {
       if (!cls) return this;
       this.className = this.className.split(/\s+/).filter(Boolean).filter(c => c !== cls).join(' ');
@@ -221,6 +253,11 @@ try {
     }
   }
 
+  /**
+ * Вычисляет количество секунд, прошедших с начала текущего дня.
+ * 
+ * @returns {number} Количество секунд от 00:00:00 до текущего момента времени.
+ */
   function getSecondsToday() {
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -228,6 +265,12 @@ try {
   }
   console.log("Секунд с начала дня: ", getSecondsToday());
 
+  /**
+ * Преобразует объект даты в строку локального формата.
+ *
+ * @param {Date} date - Объект даты для форматирования.
+ * @returns {string} Строковое представление даты по правилам текущей локали.
+ */
   function formatDate(date) {
     return date.toLocaleDateString();
   }
