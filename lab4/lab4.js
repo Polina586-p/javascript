@@ -11,12 +11,6 @@ class Book {
      * @throws {Error} Если переданные аргументы не валидны.
      */
     constructor(title, pubYear, price) {
-        /** @private {string} */
-        this._title = '';
-        /** @private {number} */
-        this._pubYear = 0;
-        /** @private {number} */
-        this._price = 0;
 
         this.title = title;
         this.pubYear = pubYear;
@@ -126,6 +120,9 @@ try {
     console.log("Книги после сортировки по году издания:");
     for (let i = 0; i < books.length; ++i) {
         books[i].show();
+
+    let book1 = new Book('', -1949, -1000);
+    book1.show();
     }
 
     /**
@@ -145,7 +142,7 @@ try {
 
     let obj1 = { [Symbol()]: true };
     let obj2 = {};
-    let obj3 = {};
+    let obj3.defineProperty({}, 'name', { value: 'John', })
 
     console.log("Объект 1", isEmpty(obj1));
     console.log("Объект 2", isEmpty(obj2));
