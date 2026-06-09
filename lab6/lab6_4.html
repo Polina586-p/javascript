@@ -43,19 +43,43 @@
             <th>Колонка 3</th>
         </tr>
         <tr>
-            <td>Клетка 1</td>
-            <td>Клетка 2</td>
-            <td>Клетка 3</td>
+            <td data-id="cell-1">Клетка 1</td>
+            <td data-id="cell-2">Клетка 2</td>
+            <td data-id="cell-3">Клетка 3</td>
         </tr>
         <tr>
-            <td>Клетка 4</td>
-            <td>Клетка 5</td>
-            <td>Клетка 6</td>
+            <td data-id="cell-4">Клетка 4</td>
+            <td data-id="cell-5">Клетка 5</td>
+            <td data-id="cell-6">Клетка 6</td>
         </tr>
     </table>
 
     <script>
-            'use strict';
+        'use strict';
+
+        // Инициализация таблицы при загрузке страницы
+        document.addEventListener('DOMContentLoaded', restoreTableData);
+
+        /**
+         * Восстанавливает сохраненные значения ячеек из sessionStorage.
+         * @returns {void}
+         */
+        function restoreTableData() {
+            const cells = document.querySelectorAll('#editable-table td');
+            cells.forEach(td => {
+                const cellId = td.getAttribute('data-id');
+                const savedValue = sessionStorage.getItem(cellId);
+                if (savedValue !== null) {
+                    td.innerHTML = savedValue;
+                }
+            });
+        }
+
+        /**
+         * Делегирование события клика на таблицу.
+         * Переводит ячейку в режим редактирования при клике на неё.
+         * @listens MouseEvent
+         */
         document.getElementById('editable-table').addEventListener('click', function (event) {
             let target = event.target;
 
@@ -64,7 +88,7 @@
             if (document.querySelector('td.editing')) 
                 return;
 
-                while (target && target !== this) {
+            while (target && target !== this) {
                 if (target.tagName === 'TD') {
                     startEditing(target);
                     return;
@@ -73,6 +97,14 @@
             }
         });
 
+        /**
+         * Переводит выбранную ячейку таблицы в режим редактирования.
+         * Заменяет текст внутри ячейки на текстовое поле (textarea) и кнопки управления.
+         * Сохраняет исходное значение в атрибут 'original-text'.
+         *
+         * @param {HTMLTableCellElement} td - Элемент ячейки таблицы, которую нужно редактировать.
+         * @returns {void}
+         */
         function startEditing(td) {
             td.classList.add('editing');
 
@@ -97,15 +129,30 @@
             });
         }
 
+        /**
+         * Завершает режим редактирования ячейки таблицы.
+         * Сохраняет внесенные изменения или восстанавливает исходный текст.
+         * Записывает новое значение в sessionStorage в случае успешного сохранения.
+         * Убирает из ячейки элементы формы (textarea и кнопки).
+         *
+         * @param {HTMLTableCellElement} td - Элемент редактируемой ячейки таблицы.
+         * @param {boolean} isSave - Флаг завершения: true для сохранения изменений, false для отмены.
+         * @returns {void}
+         */
         function finishEditing(td, isSave) {
             let textarea = td.querySelector('textarea');
-
             let originalText = td.getAttribute('original-text');
+            let cellId = td.getAttribute('data-id');
 
-            if (isSave)
-                td.innerHTML = textarea.value;
-            else
+            if (isSave) {
+                let newValue = textarea.value;
+                td.innerHTML = newValue;
+                if (cellId) {
+                    sessionStorage.setItem(cellId, newValue);
+                }
+            } else {
                 td.innerHTML = originalText;
+            }
 
             td.classList.remove('editing');
         }
