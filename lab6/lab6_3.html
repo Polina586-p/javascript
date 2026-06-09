@@ -30,7 +30,7 @@
                 event.preventDefault();
                 if (!textarea) { 
                     textarea = document.createElement('textarea');
-                    // Переносим HTML-содержимое в textarea
+
                     textarea.value = div.innerHTML;
                     div.replaceWith(textarea);
                     textarea.focus();
