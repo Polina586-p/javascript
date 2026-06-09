@@ -118,7 +118,6 @@ try {
         books[i].show();
     }
 
-    // Демонстрация ошибки при создании некорректной книги
     try {
         const badBook = new Book('', -1949, -1000);
         badBook.show();
@@ -149,13 +148,13 @@ const obj1 = { [Symbol()]: true };
 const obj2 = {};
 const obj3 = Object.defineProperty({}, 'name', { value: 'John', enumerable: true });
 
-console.log('obj1 isEmpty?', isEmpty(obj1)); // false, есть символьное свойство
-console.log('obj2 isEmpty?', isEmpty(obj2)); // true
-console.log('obj3 isEmpty?', isEmpty(obj3)); // false (собственное свойство name)
+console.log('obj1 isEmpty?', isEmpty(obj1)); 
+console.log('obj2 isEmpty?', isEmpty(obj2)); 
+console.log('obj3 isEmpty?', isEmpty(obj3));
 try {
-  // Надёжная реализация isEmpty для разных типов
+
   function isEmpty(obj) {
-    if (obj == null) return true;               // null или undefined
+    if (obj == null) return true;              
     if (typeof obj === 'string') return obj.trim() === '';
     if (Array.isArray(obj)) return obj.length === 0;
     if (obj instanceof Date) return false;
@@ -163,7 +162,7 @@ try {
     return false; // для чисел/булевых и т.д.
   }
 
-  // Тестовые объекты
+
   const obj1 = {};
   const obj2 = { a: 1 };
   const obj3 = [];
@@ -172,11 +171,9 @@ try {
   console.log("Объект 2", isEmpty(obj2)); // false
   console.log("Объект 3", isEmpty(obj3)); // true
 
-  // Объект для управления строкой CSS-классов (улучшенный)
   let classObject = {
     className: "open menu",
 
-    // Добавляет класс, избегая дубликатов; поддерживает chaining
     addClass(cls) {
       if (!cls || typeof cls !== 'string') return this;
       const classes = new Set(this.className.split(/\s+/).filter(Boolean));
@@ -185,7 +182,6 @@ try {
       return this;
     },
 
-    // Удаляет класс, возвращает this для chaining
     removeClass(cls) {
       if (!cls || typeof cls !== 'string') return this;
       const classes = this.className.split(/\s+/).filter(Boolean).filter(c => c !== cls);
@@ -197,21 +193,18 @@ try {
   classObject.addClass('close');
   console.log("className после addClass('close'):", classObject.className);
 
-  classObject.addClass('open'); // уже есть — не добавится повторно
+  classObject.addClass('open');
   console.log("className после addClass('open'):", classObject.className);
 
   classObject.removeClass('menu');
   console.log("className после removeClass('menu'):", classObject.className);
 
-  // Сериализация в JSON — функции не попадут в JSON
   let jsonString = JSON.stringify(classObject, null, 2);
   console.log("JSON строка:", jsonString);
 
-  // При парсинге мы получаем только данные, без методов
   let object2 = JSON.parse(jsonString);
   console.log('Сравнение JSON строк:', JSON.stringify(object2) === JSON.stringify(classObject)); // true
 
-  // Если нужно восстановить объект с методами, можно воспользоваться классом или прототипом
   class ClassManager {
     constructor(className = '') { this.className = className; }
     addClass(cls) {
@@ -228,12 +221,12 @@ try {
     }
   }
 
-  // Восстановление с методами:
-  const parsed = JSON.parse(jsonString);             // { className: 'open close' }
+
+  const parsed = JSON.parse(jsonString);
   const revived = Object.assign(new ClassManager(), parsed);
   console.log('revived имеет методы:', typeof revived.addClass === 'function');
 
-  // Функция подсчёта секунд с начала дня
+
   function getSecondsToday() {
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -241,14 +234,14 @@ try {
   }
   console.log("Секунд с начала дня: ", getSecondsToday());
 
-  // Форматирование даты (учитывайте, что месяц в new Date() 0‑based)
+
   function formatDate(date) {
     return date.toLocaleDateString();
   }
 
-  let date1 = new Date(2026, 5, 9);   // 2026-06-09 (месяцы: 0=январь)
-  let date2 = new Date(2000, 11, 1);  // 2000-12-01
-  let date3 = new Date(1995, 9, 10);  // 1995-10-10
+  let date1 = new Date(2026, 5, 9);   
+  let date2 = new Date(2000, 11, 1); 
+  let date3 = new Date(1995, 9, 10);
 
   console.log("Дата 1:", formatDate(date1));
   console.log("Дата 2:", formatDate(date2));
