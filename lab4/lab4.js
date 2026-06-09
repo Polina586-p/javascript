@@ -145,9 +145,11 @@ try {
 
     let obj1 = { [Symbol()]: true };
     let obj2 = {};
+    let obj3 = {};
 
     console.log("Объект 1", isEmpty(obj1));
     console.log("Объект 2", isEmpty(obj2));
+    console.log("Объект 3", isEmpty(obj3));
 
     /**
      * Объект для управления строкой CSS-классов.
