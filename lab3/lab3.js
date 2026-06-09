@@ -84,11 +84,10 @@ export function fibs(n) {
 }
 
 /**
- * Создает отсортированную по убыванию копию числового массива.
- * Не изменяет оригинальный массив.
- * 
- * @param {number[]} arr - Исходный массив чисел.
- * @returns {number[]} Новый отсортированный массив.
+ * Возвращает массив уникальных значений.
+ * @template T
+ * @param {Array<T>} arr - Входной массив.
+ * @returns {Array<T>} Массив уникальных значений.
  */
 export function arrReverseSorted(arr) {
     return arr.slice().sort((a, b) => b - a);
